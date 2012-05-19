@@ -1,0 +1,30 @@
+<div class="widehead">
+	<ul>
+		<li><a href="?m=manage">管理ページ</a></li>
+		<li><a href="?m=manage&r=new">新規エントリ</a></li>
+		<li><a href="?m=manage&r=widget">ウィジェット</a></li>
+		<li><a href="?m=manage&r=archives">ファイルアーカイブス</a></li>
+		<li><a href="?m=manage&r=apikey">APIキー管理</a></li>
+		<li><a href="?m=manage&r=archives2">ファイルアーカイブス2</a></li>
+	</ul>
+</div>
+<div id="file_archives">
+	<div>
+		<table>
+			<tbody>
+				<tr>
+					<td><img src="./image/logo_filearchives.png" /></td>
+					<td><span class="logo_head">FILE ARCHIVES2</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="file_archives_buttons">
+		<input type="button" id="upload_button" class="file_archives_button" value="Upload"/>
+		<input type="button" id="delete_button" class="file_archives_button" value="Delete"/>
+	</div>
+</div>
+<div id="file_archives_pagination" class="digg_pagination clip_paginate"></div>
+<div id="file_archives_select"></div>
+<div id="file_archives_list"></div>
+<script type="text/javascript" language="JavaScript">ds.filearchives2.start();</script>

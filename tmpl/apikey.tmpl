@@ -1,0 +1,108 @@
+<div class="widehead">
+	<ul>
+		<li><a href="?m=manage">管理ページ</a></li>
+		<li><a href="?m=manage&r=new">新規エントリ</a></li>
+		<li><a href="?m=manage&r=widget">ウィジェット</a></li>
+		<li><a href="?m=manage&r=archives">ファイルアーカイブス</a></li>
+		<li><a href="?m=manage&r=apikey">APIキー管理</a></li>
+		<li><a href="?m=manage&r=archives2">ファイルアーカイブス2</a></li>
+	</ul>
+</div>
+<div class="api_key">
+	<div>
+		<table>
+			<tbody>
+				<tr>
+					<td><img src="./image/logo_apikey.png" /></td>
+					<td><span class="logo_head">API KEY</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div style="margin: 10px; border:1px solid #666666">
+		<form action="?m=manage&r=apikey" method="POST">
+			<div class="api_key_explain">
+				<p>APIキー登録について</p>
+				<div>
+					APIキーを登録するためには、下記フォームにてAPIを使用したい<b>サイトのURL</b>を入力します。<br/>
+					例： http://www.sample_site.com/blog/index.html<br/>
+					APIの有効範囲は、入力したサイトのドメイン全体となります。つまり、上記URLの場合、ドメインが「sample_site.com」となり、これに属するページ全てで有効になります。
+				</div>
+			</div>
+			<div class="api_key_explain">
+				<p>APIキー登録フォーム</p>
+				<div>
+					<table>
+						<tbody>
+							<tr>
+								<td>
+									APIを有効にしたいURLを入力してください(例：http://www.sample_site.com/blog/index.html)<br/>
+									<?php if($items["invalid_data"]["referer"] != null) : ?>
+									<font color="#FF0000"><?=$items["invalid_data"]["referer"] ?></font><br/>
+									<?php endif ?>
+									<?php if($items["invalid_data"]["conflict"] != null) : ?>
+									<font color="#FF0000"><?=$items["invalid_data"]["conflict"] ?></font><br/>
+									<?php endif ?>
+									<input type="text" name="referer" style="width:550px;" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									利用したいAPIを選択してください<br/>
+									<?php if($items["invalid_data"]["id"] != null) : ?>
+									<font color="#FF0000"><?=$items["invalid_data"]["id"] ?></font><br/>
+									<?php endif ?>
+									<select name="id">
+										<option value="0" selected="selected">...</option>
+										<?php foreach($items["api_data"] as $val) : ?>
+											<option value="<?=$val['id'] ?>"><?=$val['name'] ?></option>
+										<?php endforeach ?>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="submit" class="submit" value="APIキー生成" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div style="margin: 10px; border:1px solid #666666">
+		<div class="api_key_explain">
+			<p>APIキー登録一覧</p>
+			<?php if(count($items["api_list"]) > 0) : ?>
+			<table id="apikey_list_table" class="tablesorter">
+				<thead>
+					<tr>
+						<th scope="col">ドメイン名</th>
+						<th scope="col">登録日時</th>
+						<th scope="col">APIキー</th>
+						<th scope="col" width="70">適用API名</th>
+						<th scope="col" width="22">削除</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($items["api_list"] as $val) : ?>
+					<tr>
+						<td><?=$val['domain'] ?></td>
+						<td><?=$val['date'] ?></td>
+						<td><?=$val['apikey'] ?></td>
+						<td><?=$val['apiname'] ?></td>
+						<td align="center">
+							<a href="?m=manage&r=apikey&delid=<?php echo $val['id']; ?>"><img src="./image/delete.png" border="0"/></a>
+						</td>
+					</tr>
+					<?php endforeach ?>
+				</tbody>
+			</table>
+			<?php else : ?>
+			APIキーは登録されていません
+			<?php endif ?>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" language="JavaScript">ds.apikey.start();</script>

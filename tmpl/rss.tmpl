@@ -1,0 +1,30 @@
+<<?='?' ?>xml version="1.0" encoding="UTF-8" <?='?' ?>>
+<rdf:RDF
+	xmlns="http://purl.org/rss/1.0/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xml:lang="ja-JP">
+
+	<channel rdf:about="<?=$items['channel']['about'] ?>">
+	<title><?=$items['channel']['title'] ?></title> 
+	<link><?=$items['channel']['link'] ?></link> 
+	<description><?=$items['channel']['description'] ?></description> 
+	<dc:creator><?=$items['channel']['creator'] ?></dc:creator> 
+<items>
+<rdf:Seq>
+<?php foreach ($items['rss'] as $item) : ?>
+	<rdf:li rdf:resource="<?=$item['link'] ?>" /> 
+<?php endforeach ?>
+ </rdf:Seq>
+ </items>
+ </channel>
+<?php foreach ($items['rss'] as $entry) : ?>
+ <item rdf:about="<?=$entry['link'] ?>">
+	<title><?=$entry['title'] ?></title> 
+	<link><?=$entry['link'] ?></link> 
+	<dc:date><?=$entry['date'] ?></dc:date> 
+	<description><?=$entry['description'] ?></description>
+	<dc:subject><?=$entry['subject'] ?></dc:subject>
+ </item>
+<?php endforeach ?>
+</rdf:RDF>

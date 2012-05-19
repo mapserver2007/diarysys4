@@ -1,0 +1,98 @@
+<div class="widehead">
+	<ul>
+		<li><a href="?m=manage">管理ページ</a></li>
+		<li><a href="?m=manage&r=new">新規エントリ</a></li>
+		<li><a href="?m=manage&r=widget">ウィジェット</a></li>
+		<li><a href="?m=manage&r=archives">ファイルアーカイブス</a></li>
+		<li><a href="?m=manage&r=apikey">APIキー管理</a></li>
+		<li><a href="?m=manage&r=archives2">ファイルアーカイブス2</a></li>
+	</ul>
+</div>
+<div>
+	<table>
+		<tbody>
+			<tr>
+				<td><img src="./image/logo_widget.png" /></td>
+				<td><span class="logo_head">WIDGET</span></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!-- 設定読み込み成功 -->
+<?php if($items["flg"] == "success") : ?>
+<form action=".?m=manage&r=widget" method="POST">
+	<?php foreach($items["data"] as $key => $val) : ?>
+	<div class="widget">
+		<input type="hidden" name="wid_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>"/>
+		<div class="widget_left">
+			<img src="./image/<?php echo $val["image"]; ?>" />
+			<input type="hidden" name="wimage_<?php echo $val["id"]; ?>" value="<?php echo $val["image"]; ?>"/>
+		</div>
+		<div class="widget_right">
+			<!-- 必須項目 -->
+			<!-- プラグイン名 -->
+			<p class="widget_item">プラグイン名(英数字のみ)</p>
+			<?php if($val["pluginname_invalid"]) :　?>
+				<div><input class="widget_invalid" type="text" name="wpluginname_<?php echo $val["id"]; ?>" /></div>
+			<?php else : ?>
+				<div><input type="text" name="wpluginname_<?php echo $val["id"]; ?>" value="<?php echo $val["pluginname"]; ?>" /></div>
+			<?php endif ?>
+			<!-- プラグインの説明 -->
+			<p class="widget_item">プラグインの説明(日本語可)</p>
+			<?php if($val["title_invalid"]) :　?>
+				<div><input class="widget_invalid" type="text" name="wtitle_<?php echo $val["id"]; ?>" /></div>
+			<?php else : ?>
+				<div><input type="text" name="wtitle_<?php echo $val["id"]; ?>" value="<?php echo $val["title"]; ?>" ></div>
+			<?php endif ?>
+			<!-- プラグインの表示順 -->
+			<p class="widget_item">プラグインの表示順(半角数値のみ)</p>
+			<?php if($val["priority_invalid"]) :　?>
+				<div><input class="widget_invalid" type="text" name="wpriority_<?php echo $val["id"]; ?>" /></div>
+			<?php else : ?>
+				<div><input type="text" name="wpriority_<?php echo $val["id"]; ?>" value="<?php echo $val["priority"]; ?>" ></div>
+			<?php endif ?>
+			<!-- プラグインの表示状態 -->
+			<p class="widget_item">プラグインの表示状態(0：非表示、1:表示)</p>
+			<?php if($val["state_invalid"]) :　?>
+				<div><input class="widget_invalid" type="text" name="wstate_<?php echo $val["id"]; ?>" /></div>
+			<?php else : ?>
+				<div><input type="text" name="wstate_<?php echo $val["id"]; ?>" value="<?php echo $val["state"]; ?>" /></div>
+			<?php endif ?>
+			<!-- プラグインの画像 -->
+			<p class="widget_item">プラグインの画像パス</p>
+			<?php if($val["image_invalid"]) :　?>
+				<div><input class="widget_invalid" type="text" name="wimage_<?php echo $val["id"]; ?>" /></div>
+			<?php else : ?>
+				<div><input type="text" name="wimage_<?php echo $val["id"]; ?>" value="<?php echo $val["image"]; ?>" /></div>
+			<?php endif ?>
+			<!-- 固有項目 -->
+			<!-- プラグインのURL -->
+			<?php if($val["url_invalid"]) :　?>
+				<p class="widget_item">プラグインのURL(http形式)</p>
+				<div><input class="widget_invalid" type="text" name="wurl_<?php echo $val["id"]; ?>" /></div>
+			<?php elseif($val["url"]) : ?>
+				<p class="widget_item">プラグインのURL(http形式)</p>
+				<div><input type="text" name="wurl_<?php echo $val["id"]; ?>" value="<?php echo $val["url"]; ?>" /></div>
+			<?php endif ?>
+			<!-- プラグインの表示件数 -->
+			<?php if($val["disp_invalid"]) :　?>
+				<p class="widget_item">プラグインの表示件数</p>
+				<div><input class="widget_invalid" type="text" name="wdisp_<?php echo $val["id"]; ?>" /></div>
+			<?php elseif($val["disp"]) : ?>
+				<p class="widget_item">プラグインの表示件数</p>
+				<div><input type="text" name="wdisp_<?php echo $val["id"]; ?>" value="<?php echo $val["disp"]; ?>" /></div>
+			<?php endif ?>
+		</div>
+		<div class="widget_break"></div>
+	</div>
+	<?php endforeach ?>
+	<input type="submit" value="ウィジェット設定保存" />
+</form>
+
+<!-- 設定読み込み失敗 -->
+<?php elseif($items["flg"] == "failure") : ?>
+	<div class="widget">
+		<p>ウィジェットの設定に失敗しました</p>
+		<div class="widget_break"></div>
+	</div>
+<?php endif ?>

@@ -1,0 +1,42 @@
+<div class="widehead">
+  <ul>
+    <li>Calendar & Archives</li>
+  </ul>
+</div>
+<div class="ds_submenu_content">
+  <div id="ds_submenu_left_container"> </div>
+  <div id="ds_submenu_right_container">
+    <div id="archives">
+      <?php foreach($items["archives"] as $key => $value) : ?>
+      <ul>
+        <?php echo $key; ?>
+        <?php foreach($value as $month => $count) : ?>
+        <?php if($count > 0) : ?>
+        <li>
+          <a class="tip" href="?month=<?php echo $key . '-' . sprintf('%02d', $month); ?>">
+            <?php echo sprintf("%02d", $month); ?>
+            <span><?php echo "{$key}年{$month}月：{$count}エントリ"; ?></span>
+          </a>
+        </li>
+        <?php else : ?>
+        <li><?php echo sprintf("%02d", $month); ?></li>
+        <?php endif ?>
+        <?php endforeach ?>
+      </ul>
+      <?php endforeach ?>
+    </div>
+    <div id="calendar">
+      <ul>
+      <?php echo $items['calendar'][0]['current_month']; ?>
+      <?php foreach($items["calendar"] as $val) : ?>
+      <?php if($val["entried"]) : ?>
+      <li><a href="?day=<?php echo $val['param']; ?>"><?php echo trim($val['day']); ?></a></li>
+      <?php else : ?>
+      <li><?php echo $val['day']; ?></li>
+      <?php endif ?>
+      <?php endforeach ?>
+      </ul>
+    </div>
+    <!-- <div><img src="<?php echo $items['chart']; ?>" /></div> -->
+  </div>
+</div>

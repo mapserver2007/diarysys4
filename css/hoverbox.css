@@ -1,0 +1,74 @@
+.hoverbox
+{
+	cursor: default;
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+
+.hoverbox .preview
+{
+	display: none;
+}
+
+.hoverbox a:hover .preview
+{
+	display: block;
+	position: absolute;
+	top: -33px;
+	left: -45px;
+	z-index: 10;
+}
+
+.hoverbox img
+{
+	border-color: #000;
+	border-style: solid;
+	border-width: 1px;
+	color: inherit;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: top;
+}
+
+.hoverbox li
+{
+	color: inherit;
+	display: inline;
+	float: left;
+	margin: 1px;
+	padding: 0px;
+	position: relative;
+}
+
+.hoverbox .preview
+{
+	border-color: #000;
+}
+
+/* =Internet Explorer Fixes
+----------------------------------------------------------------------*/
+
+.hoverbox a
+{
+	position: relative;
+}
+
+.hoverbox a:hover
+{
+	display: block;
+	font-size: 100%;
+	z-index: 10;
+}
+
+.hoverbox a:hover .preview
+{
+	top: -38px;
+	left: -50px;
+}
+
+.hoverbox li
+{
+	position: static;
+}

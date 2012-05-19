@@ -1,0 +1,31 @@
+<div class="widehead">
+	<ul>
+		<li><a href="?m=manage">管理ページ</a></li>
+		<li><a href="?m=manage&r=new">新規エントリ</a></li>
+		<li><a href="?m=manage&r=widget">ウィジェット</a></li>
+		<li><a href="?m=manage&r=archives">ファイルアーカイブス</a></li>
+		<li><a href="?m=manage&r=apikey">APIキー管理</a></li>
+		<li><a href="?m=manage&r=archives2">ファイルアーカイブス2</a></li>
+	</ul>
+</div>
+<div id="file_archives">
+	<div>
+		<table>
+			<tbody>
+				<tr>
+					<td><img src="./image/logo_filearchives.png" /></td>
+					<td><span class="logo_head">FILE ARCHIVES</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<form action="./pl/upload.pl" name="file_archives_uploader" target="upload" method="post" enctype="multipart/form-data" onsubmit="return ds.filearchives.submit('file_archives_uploader');">
+		<input type="file" name="filename" size="50" />
+		<input type="submit" />
+		<span id="file_archives_progress"></span>
+	</form>
+</div>
+<iframe src="about:blank" name="upload" style="width:0px; height:0px; display:none;"></iframe>
+<!-- アップロードファイル一覧 -->
+<script type="text/javascript" language="JavaScript">ds.filearchives.start();</script>
+<div id="file_archives_list"></div>

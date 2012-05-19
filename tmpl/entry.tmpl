@@ -1,0 +1,82 @@
+<div class="widehead">
+	<ul>
+		<li>Entry</li>
+	</ul>
+</div>
+<?php if(count($items[0]["page"]) != 0) : ?>
+<div class="ds_entry_pager">
+	<ul>
+		<?php if($items[0]["page"]["current"] != 1) : ?>
+		<li><a href="<?=sprintf($items[0]['page']['href'], $items[0]['page']['current'] - 1) ?>">&lt;&lt;</a></li>
+		<?php endif ?>
+		<?php for($i = 1; $i <= ceil($items[0]["page"]["count"] / $items[0]["page"]["offset"]); $i++) : ?>
+		<?php if($i == $items[0]["page"]["current"]) : ?>
+		<li><?php echo sprintf("%02d", $i); ?></li>
+		<?php else : ?>
+		<li><a href="<?=sprintf($items[0]['page']['href'], $i) ?>"><?php echo sprintf('%02d', $i); ?></a></li>
+		<?php endif ?>
+		<?php endfor ?>
+		<?php if($items[0]["page"]["current"] != ceil($items[0]["page"]["count"] / $items[0]["page"]["offset"])) : ?>
+		<li><a href="<?=sprintf($items[0]['page']['href'], $items[0]['page']['current'] + 1) ?>">&gt;&gt;</a></li>
+		<?php endif ?>
+	</ul>
+</div>
+<?php endif ?>
+<?php foreach($items as $key => $val) : ?>
+<?php $did = "description_" . $val['id']; ?>
+<div class="ds_entry_article">
+	<div class="ds_entry_article_title">
+		<p class="ds_entry_article_title_main">
+			<a href="?id=<?php echo $val['id']; ?>">
+				<?php echo $val["title"]; ?>
+			</a>
+		</p>
+		<p class="ds_entry_article_title_sub">
+			<?php foreach($val["tag"] as $tag) : ?>
+				<span>
+					<a href="?tag=<?php echo $tag['id']; ?>"><?php echo $tag["name"]; ?></a>
+				</span>
+			<?php endforeach ?>
+			<span><img src="<?php echo $val['weather']; ?>" /></span>
+			<span><?php echo $val["date"]; ?></span>
+		</p>
+	</div>
+	<div class="ds_entry_description" id="<?php echo $did; ?>"><?php echo $val["description"]; ?></div>
+	<div class="ds_entry_relation">
+		<p>関連エントリ</p>
+		<?php if(count($val["relation"]) != 0) : ?>
+		<ul>
+		<?php foreach($val["relation"] as $rel) : ?>
+			<li><a href="?id=<?=$rel['id']; ?>"><?=$rel['title']; ?></a> (<?=$rel['rel']; ?>%)</li>
+		<?php endforeach ?>
+		</ul>
+		<?php else : ?>
+		関連エントリはありません。
+		<?php endif ?>
+	</div>
+	<script type="text/javascript" language="JavaScript">
+		ds.newpost.setEscape("off");
+		ds.newpost.preview({to : '<?php echo $did; ?>', from : '<?php echo $did; ?>'});
+	</script>
+</div>
+<?php endforeach ?>
+<?php if(count($items[0]["page"]) != 0) : ?>
+<div class="ds_entry_pager">
+	<ul>
+		<?php if($items[0]["page"]["current"] != 1) : ?>
+		<li><a href="?page=<?=$items[0]['page']['current'] - 1 ?>">&lt;&lt;</a></li>
+		<?php endif ?>
+		<?php for($i = 1; $i <= ceil($items[0]["page"]["count"] / $items[0]["page"]["offset"]); $i++) : ?>
+		<?php if($i == $items[0]["page"]["current"]) : ?>
+		<li><?php echo sprintf("%02d", $i); ?></li>
+		<?php else : ?>
+		<li><a href="?page=<?=$i ?>"><?php echo sprintf('%02d', $i); ?></a></li>
+		<?php endif ?>
+		<?php endfor ?>
+		<?php if($items[0]["page"]["current"] != ceil($items[0]["page"]["count"] / $items[0]["page"]["offset"])) : ?>
+		<li><a href="?page=<?=$items[0]['page']['current'] + 1 ?>">&gt;&gt;</a></li>
+		<?php endif ?>
+	</ul>
+</div>
+<?php endif ?>
+<script type="text/javascript" language="JavaScript">prettyPrint();</script>

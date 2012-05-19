@@ -1,0 +1,83 @@
+<div class="widehead">
+	<ul>
+		<li><a href="?m=manage">管理ページ</a></li>
+		<li><a href="?m=manage&r=new">新規エントリ</a></li>
+		<li><a href="?m=manage&r=widget">ウィジェット</a></li>
+		<li><a href="?m=manage&r=archives">ファイルアーカイブス</a></li>
+		<li><a href="?m=manage&r=apikey">APIキー管理</a></li>
+		<li><a href="?m=manage&r=archives2">ファイルアーカイブス2</a></li>
+	</ul>
+</div>
+<?php if(count($items[0]["page"]) != 0) : ?>
+<div class="ds_entry_pager">
+	<ul>
+		<?php if($items[0]["page"]["current"] != 1) : ?>
+		<li><a href="?m=manage&page=<?=$items[0]['page']['current'] - 1 ?>">&lt;&lt;</a></li>
+		<?php endif ?>
+		<?php for($i = 1; $i <= ceil($items[0]["page"]["count"] / $items[0]["page"]["offset"]); $i++) : ?>
+		<?php if($i == $items[0]["page"]["current"]) : ?>
+		<li><?php echo sprintf("%02d", $i); ?></li>
+		<?php else : ?>
+		<li><a href="?m=manage&page=<?=$i ?>"><?php echo sprintf('%02d', $i); ?></a></li>
+		<?php endif ?>
+		<?php endfor ?>
+		<?php if($items[0]["page"]["current"] != ceil($items[0]["page"]["count"] / $items[0]["page"]["offset"])) : ?>
+		<li><a href="?m=manage&page=<?=$items[0]['page']['current'] + 1 ?>">&gt;&gt;</a></li>
+		<?php endif ?>
+	</ul>
+</div>
+<?php endif ?>
+<div id="ds_manage_list">
+	<div>
+		<table>
+			<tbody>
+				<tr>
+					<td><img src="./image/logo_manage.png" /></td>
+					<td><span class="logo_head">ENTRY MANAGE</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<?php if(count($items) > 0) :　?>
+	<table id="manage_list_table" class="tablesorter" cellpadding="5">
+		<thead>
+			<tr>
+				<th scope="col" width="12%">日付</th>
+				<th scope="col">タイトル</th>
+				<th scope="col" width="30%">タグ</th>
+				<th scope="col" width="2%">削除</th>
+				<th scope="col" width="2%">編集</th>
+			</tr>
+		</thead>
+		<?php foreach($items as $val) : ?>
+			<tr>
+				<td><?php echo $val["date"]; ?></td>
+				<td><?php echo $val["title"]; ?></td>
+				<td>
+					<?php for($i = 0; $i < count($val["tag"]); $i++) : ?>
+					<?php echo "[" . $val["tag"][$i][name] ."]"; ?>
+					<?php endfor ?>
+				</td>
+				<td align="center">
+					<a href="?m=manage&r=delete&id=<?php echo $val['id']; ?>"><img src="./image/delete.png" border="0"/></a>
+				</td>
+				<td align="center">
+					<a href="?m=manage&r=edit&id=<?php echo $val['id']; ?>"><img src="./image/edit.png" border="0"/></a>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5">
+					<div class="manage_list_detail" onclick="ds.manage.description(<?php echo $val['id']; ?>);">
+						<b>本文</b>
+						<img id="manage_list_detail_img_<?php echo $val['id']; ?>" src="./image/table_asc.gif" />
+					</div>
+					<div id="manage_list_description_<?php echo $val['id']; ?>"></div>
+				</td>
+			</tr>
+		<?php endforeach ?>
+	</table>
+	<script type="text/javascript" language="JavaScript">ds.manage.start();</script>
+	<?php else : ?>
+	<p>登録されたエントリはありません</p>
+	<?php endif ?>
+</div>

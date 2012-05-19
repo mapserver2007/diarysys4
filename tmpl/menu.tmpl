@@ -1,0 +1,16 @@
+<div style="float:left">
+	<h1>
+		<img src="./image/logo.png" />
+		<p>日々寝不足</p>
+	</h1>
+</div>
+<div style="float:right;margin-top:50px;">
+	<table>
+		<tr>
+			<?php foreach($items["link"] as $val) : ?>
+			<td><img src="<?php echo $val['img']; ?>" width="24px" height="24px" /></td>
+			<td><h2><a href="<?php echo $val['url']; ?>"><?php echo $val['text']; ?></a></h2></td>
+			<?php endforeach ?>
+		</tr>
+	</table>
+</div>
